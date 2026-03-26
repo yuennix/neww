@@ -452,12 +452,12 @@ def confirm_id(mail, uid, otp, data, ses, password):
 
 def register_account(domain_choice, name_option, gender_option):
     global live, cp
-    # time.sleep(random.uniform(2, 5)) # Slow down initial request
+    # time.sleep(random.uniform(0.03, 0.05)) # Slow down initial request
     while True:
         try:
             ses = requests.Session()
             res = ses.get('https://touch.facebook.com/reg')
-            # time.sleep(random.uniform(1, 3)) # Human-like delay after loading page
+            # time.sleep(random.uniform(0.03, 0.05)) # Human-like delay after loading page
             form = extract_form(res.text)
 
             # Gender Selection
@@ -489,7 +489,7 @@ def register_account(domain_choice, name_option, gender_option):
             email = get_temp_email(fname, lname, domain_choice)
             password = fake_password(globals().get('CUSTOM_PASS'))
 
-            # time.sleep(random.uniform(2, 4)) # Delay while "typing" info
+            # time.sleep(random.uniform(0.5,0.8)) # Delay while "typing" info
 
             payload = {
             'ccp': '2',
@@ -536,10 +536,10 @@ def register_account(domain_choice, name_option, gender_option):
                 uid = cookies["c_user"]
                 print(Panel(f"{G}[{Y}✓{G}]{W} LIVE ID CREATED: {G}{uid}\n{G}[{Y}✓{G}]{W} PASS: {G}{password}\n{G}[{Y}✓{G}]{W} NAME: {G}{fname} {lname}\n{G}[{Y}✓{G}]{W} MAIL: {G}{email}",border_style="bold green"))
 
-                # time.sleep(random.uniform(2, 5)) # Removed wait for code
+                # time.sleep(random.uniform(0.03, 0.05)) # Removed wait for code
                 code = get_temp_code(email)
                 if code:
-                    # time.sleep(random.uniform(2, 4)) # Human delay before confirming
+                    # time.sleep(random.uniform(0.5, 1)) # Human delay before confirming
                     confirm_id(email, uid, code, reg.text, ses, password)
                 live += 1
                 break
@@ -548,7 +548,7 @@ def register_account(domain_choice, name_option, gender_option):
                 # Silent retry logic
                 continue
 
-            # time.sleep(random.uniform(3, 7)) # Removed break between creations
+            # time.sleep(random.uniform(0.5, 1)) # Removed break between creations
         except requests.exceptions.ConnectionError:
             # Silent retry on connection error too
             time.sleep(1)
