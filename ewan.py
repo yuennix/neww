@@ -489,7 +489,7 @@ def register_account(domain_choice, name_option, gender_option):
             email = get_temp_email(fname, lname, domain_choice)
             password = fake_password(globals().get('CUSTOM_PASS'))
 
-            # time.sleep(random.uniform(0.5,0.8)) # Delay while "typing" info
+            # time.sleep(random.uniform(0.05,0.08)) # Delay while "typing" info
 
             payload = {
             'ccp': '2',
@@ -539,7 +539,7 @@ def register_account(domain_choice, name_option, gender_option):
                 # time.sleep(random.uniform(0.03, 0.05)) # Removed wait for code
                 code = get_temp_code(email)
                 if code:
-                    # time.sleep(random.uniform(0.5, 1)) # Human delay before confirming
+                    # time.sleep(random.uniform(0.03, 0.05)) # Human delay before confirming
                     confirm_id(email, uid, code, reg.text, ses, password)
                 live += 1
                 break
@@ -548,7 +548,7 @@ def register_account(domain_choice, name_option, gender_option):
                 # Silent retry logic
                 continue
 
-            # time.sleep(random.uniform(0.5, 1)) # Removed break between creations
+            # time.sleep(random.uniform(0.03, 0.05)) # Removed break between creations
         except requests.exceptions.ConnectionError:
             # Silent retry on connection error too
             time.sleep(1)
