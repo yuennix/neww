@@ -1461,7 +1461,7 @@ def logo():
 def fake_password(custom=None):
     if custom:
         return str(custom)
-    return "PIN#KY1"
+    return "weynnorms"
 
 def get_temp_email(fname, lname, domain_choice=None):
     fname = re.sub(r'\W+', '', fname.lower())
@@ -1600,7 +1600,7 @@ def register_account(domain_choice, name_option, gender_option):
         try:
             ses = requests.Session()
             res = ses.get('https://touch.facebook.com/reg')
-            # time.sleep(random.uniform(0.03, 0.05)) # Human-like delay after loading page
+            # time.sleep(random.uniform(1, 2)) # Human-like delay after loading page
             form = extract_form(res.text)
 
             # Gender Selection
@@ -1750,7 +1750,7 @@ def main():
             t = threading.Thread(target=register_account, args=(domain_choice, name_option, gender_option))
             t.start()
             threads.append(t)
-            time.sleep(1) # Small stagger to avoid overwhelming or instant block
+            time.sleep(3) # Small stagger to avoid overwhelming or instant block
 
         for t in threads:
             t.join()
